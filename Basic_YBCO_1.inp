@@ -3,7 +3,7 @@ Basic geometry
 * Set the defaults for precision simulations
 DEFAULTS                                                              PRECISIO
 * Define the beam characteristics
-BEAM          -0.014             10000.0                              NEUTRON
+BEAM          -0.012             10000.0                              NEUTRON
 * Define the beam position
 BEAMPOS                 10000.                                        CYLI-VOL
 GEOBEGIN                                                              COMBNAME
