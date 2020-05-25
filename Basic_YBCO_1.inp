@@ -1,0 +1,94 @@
+TITLE
+Basic geometry
+* Set the defaults for precision simulations
+DEFAULTS                                                              PRECISIO
+* Define the beam characteristics
+BEAM          -0.014             10000.0                              NEUTRON
+* Define the beam position
+BEAMPOS                 10000.                                        CYLI-VOL
+GEOBEGIN                                                              COMBNAME
+    0    0          
+* Black body
+SPH blkhole    0.0 0.0 0.0 100000.
+* Void sphere
+SPH void       0.0 0.0 0.0 10000.
+ZCC L1         0.0 0.0 0.75
+ZCC L2         0.0 0.0 1.5
+ZCC L3         0.0 0.0 1.50075
+ZCC L4         0.0 0.0 1.5015
+ZCC L5         0.0 0.0 1.50225
+ZCC L6         0.0 0.0 1.503
+ZCC L7         0.0 0.0 1.50375
+ZCC L8         0.0 0.0 1.51375
+ZCC L9         0.0 0.0 1.52375
+ZCC L10        0.0 0.0 2.27375
+END
+* Black hole
+GRAVE        5 -void
+* Void around
+VOID         5 +void -L10
+* Layer 1
+LAYER1       5 +L1 +void
+* Layer 2
+LAYER2       5 +L2 -L1 +void
+* Layer 3
+LAYER3       5 +L3 -L2 +void
+* Layer 4
+LAYER4       5 +L4 -L3 +void
+* Layer 5
+LAYER5       5 +L5 -L4 +void
+* Layer 6
+LAYER6       5 +L6 -L5 +void
+* Layer 7
+LAYER7       5 +L7 -L6 +void
+* Layer 8
+LAYER8       5 +L8 -L7 +void
+* Layer 9
+LAYER9       5 +L9 -L8 +void
+* Layer 10
+LAYER10      5 +L10 -L9 +void
+END
+GEOEND
+* ..+....1....+....2....+....3....+....4....+....5....+....6....+....7..
+ASSIGNMA    BLCKHOLE     GRAVE
+ASSIGNMA      VACUUM      VOID
+ASSIGNMA      COPPER    LAYER1
+ASSIGNMA    HSTALLOY    LAYER2
+ASSIGNMA       AL2O3    LAYER3
+ASSIGNMA        Y2O3    LAYER4
+ASSIGNMA         MgO    LAYER5
+ASSIGNMA         MgO    LAYER6
+ASSIGNMA      LaMnO3    LAYER7
+ASSIGNMA        YBCO    LAYER8
+ASSIGNMA      SILVER    LAYER9
+ASSIGNMA      COPPER   LAYER10
+EMF
+LOW-NEUT        260.                           0.0
+MATERIAL                             6.3                              YBCO
+COMPOUND     -0.1131  YITTRIUM   -0.4134    BARIUM   -0.2858    COPPERYBCO
+COMPOUND     -0.1677    OXYGEN                                        YBCO
+MATERIAL                            6.52                              LaMnO3
+COMPOUND     -0.5744   LNTHNUM   -0.2272  MANGANSE   -0.1984    OXYGENLaMnO3
+COMPOUND     -48.801    NICKEL     -20.6  CHROMIUM     -18.4      IRONHSTALLOY
+COMPOUND        -8.8  MOLYBDNM      -1.3    COBOLT     -0.62  TUNGSTENHSTALLOY
+COMPOUND       -0.69  MANGANSE     -0.78   SILICON    -0.009    CARBONHSTALLOY
+MATERIAL                            3.58                              MgO
+COMPOUND      -0.603  MAGNESIU    -0.397    OXYGEN                    MgO
+MATERIAL         12.    24.305     1.738                              MAGNESIU
+MATERIAL                            5.01                              Y2O3
+COMPOUND     -0.7875  YITTRIUM   -0.2125    OXYGEN                    Y2O3
+MATERIAL                            3.95                              AL2O3
+COMPOUND     -0.5292  ALUMINUM   -0.4708    OXYGEN                    AL2O3
+MATERIAL         39.    88.906     4.469                              YITTRIUM
+MATERIAL                            8.89                              HSTALLOY
+MATERIAL         56.   137.327      3.25                              BARIUM
+MATERIAL         57.  138.9055     6.145                              LNTHNUM
+MATERIAL         25.    54.938      7.21                              MANGANSE
+MATERIAL         24.   51.9961      7.18                              CHROMIUM
+MATERIAL         42.     95.94     10.22                              MOLYBDNM
+MATERIAL         27.   58.9332       8.9                              COBOLT
+* Set the random number seed
+RANDOMIZ          1.
+* Set the number of primary histories to be simulated in the run
+START
+STOP
